@@ -1,47 +1,48 @@
 package by.bsuir.dsp.lab;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 public class StartCharting {
 	  
-	public static void main(String[] args) {
+	public static ChartPanel paint() {
 
-		SwingUtilities.invokeLater(new Runnable() {
-	          public void run() {
-                JFrame frame = new JFrame("Charts");
-
-                frame.setSize(600, 400);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setVisible(true);
-
-                XYDataset ds = createDataset();
                 JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
-                        "x", "y", ds, PlotOrientation.VERTICAL, true, true,
+                        "n", "x(n)", createDataset(), PlotOrientation.VERTICAL, true, true,
                         false);
 
                 ChartPanel cp = new ChartPanel(chart);
-
-                frame.getContentPane().add(cp);
+                cp.setPreferredSize(new Dimension(200, 100));
+                return cp;
             }
- 
-          });
-    
-	  }
-    private static XYDataset createDataset() {
+	  
 
-        DefaultXYDataset ds = new DefaultXYDataset();
+    private static XYDataset  createDataset() {
+    	
 
-        double[][] data = { {0.1, 0.2, 0.3}, {1, 2, 3} };
+    	XYSeriesCollection dataset = new XYSeriesCollection( );  
+    	
+    	for (int i = 0; i < 5; i++)
+        {
+            double fi = Constants.fis[i];
+            XYSeries series = new XYSeries( "φ" + (i + 1) + ": " + Math.round(fi * 100.0) /100.0 + " " );         
+           
+            for (int n = 0; n < Constants.N; n++)
+            {
+            	 series.add( n, Functions.func1(Constants.A1_1, Constants.f_1, n, fi)  );           
+            }
+            dataset.addSeries( series);
+        }
+       
 
-        ds.addSeries("series1", data);
 
-        return ds;
+        return dataset;
     }
 }
