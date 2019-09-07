@@ -24,7 +24,7 @@ public class StartCharting {
             }
 	  
 
-    private static XYDataset  createDataset() {
+    public static XYDataset  createDataset() {
     	
 
     	XYSeriesCollection dataset = new XYSeriesCollection( );  
