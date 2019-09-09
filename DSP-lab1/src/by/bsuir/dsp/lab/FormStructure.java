@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -16,9 +18,10 @@ import org.jfree.ui.RefineryUtilities;
 
 public class FormStructure extends ApplicationFrame implements ActionListener {
 
-	private JPanel controlPanel;
 	private ChartPanel chartPanel;
 	private JPanel content;
+
+	private Map<String, DatasetXY> buttonListners;
 
 	public FormStructure(String title) {
 		super(title);
@@ -27,6 +30,10 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 
 	private void initUI() {
 
+		buttonListners = new HashMap<>();
+		buttonListners.put("task1", new Part1_Task1());
+		buttonListners.put("task2", new Part1_Task2());
+
 		content = new JPanel(new BorderLayout());
 		content.add(formControlPanel(), BorderLayout.SOUTH);
 		setContentPane(content);
@@ -34,12 +41,14 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 
 	private JPanel formControlPanel() {
 
+		JPanel controlPanel;
+
 		final JButton button = new JButton("Add New Data Item");
-		button.setActionCommand("ADD_DATA");
+		button.setActionCommand("task1");
 		button.addActionListener(this);
 
 		final JButton button2 = new JButton("Next graph");
-		button2.setActionCommand("NEXT");
+		button2.setActionCommand("task2");
 		button2.addActionListener(this);
 
 		chartPanel = createDemoPanel(null);
@@ -68,11 +77,8 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand() == "ADD_DATA") {
-			repaintChart(new Part1_Task1().createDataset());
-		} else if (e.getActionCommand() == "NEXT") {
-			repaintChart(new Part1_Task2().createDataset());
-		}
+		buttonListners.keySet().parallelStream().filter(a -> e.getActionCommand().equals(a))
+				.forEach(a -> repaintChart(buttonListners.get(a).createDataset()));
 
 	}
 
