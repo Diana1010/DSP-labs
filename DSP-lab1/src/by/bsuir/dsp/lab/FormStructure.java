@@ -2,6 +2,7 @@ package by.bsuir.dsp.lab;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,11 +41,19 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 		button.setActionCommand("ADD_DATA");
 		button.addActionListener(this);
 
+		final JButton button2 = new JButton("Next graph");
+		button2.setActionCommand("NEXT");
+		button2.addActionListener(this);
+
 		content = new JPanel(new BorderLayout());
 		chartPanel = createDemoPanel(StartCharting.createDataset());
 		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
 		content.add(chartPanel);
-		content.add(button, BorderLayout.SOUTH);
+		controlPanel = new JPanel(new FlowLayout());
+		controlPanel.add(button);
+		controlPanel.add(button2);
+		content.add(controlPanel, BorderLayout.SOUTH);
+
 		setContentPane(content);
 
 	}
