@@ -10,8 +10,10 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
@@ -31,8 +33,8 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 	private void initUI() {
 
 		buttonListners = new HashMap<>();
-		buttonListners.put("task1", new Part1_Task1());
-		buttonListners.put("task2", new Part1_Task2());
+		buttonListners.put("task1", new Part1Task1());
+		buttonListners.put("task2", new Part1Task2());
 
 		content = new JPanel(new BorderLayout());
 		content.add(formControlPanel(), BorderLayout.SOUTH);
@@ -62,7 +64,7 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 	}
 
 	public static ChartPanel createDemoPanel(XYDataset dataset) {
-		JFreeChart chart = StartCharting.paint(dataset);
+		JFreeChart chart = createChart(dataset);
 		return new ChartPanel(chart);
 	}
 
@@ -77,7 +79,7 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		buttonListners.keySet().parallelStream().filter(a -> e.getActionCommand().equals(a))
+		buttonListners.keySet().stream().filter(a -> e.getActionCommand().equals(a))
 				.forEach(a -> repaintChart(buttonListners.get(a).createDataset()));
 
 	}
@@ -89,6 +91,12 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
 		content.add(chartPanel);
 		setContentPane(content);
+	}
+
+	private static JFreeChart createChart(XYDataset dataset) {
+
+		return ChartFactory.createXYLineChart("Test Chart", "n", "x(n)", dataset, PlotOrientation.VERTICAL, true, true,
+				false);
 	}
 
 }
