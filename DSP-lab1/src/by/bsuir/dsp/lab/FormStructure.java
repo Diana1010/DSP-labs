@@ -45,11 +45,11 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 
 		JPanel controlPanel;
 
-		final JButton button = new JButton("Add New Data Item");
+		final JButton button = new JButton("Variable fi");
 		button.setActionCommand("task1");
 		button.addActionListener(this);
 
-		final JButton button2 = new JButton("Next graph");
+		final JButton button2 = new JButton("Variable f");
 		button2.setActionCommand("task2");
 		button2.addActionListener(this);
 
@@ -70,7 +70,7 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 
 	public static void main(final String[] args) {
 
-		final FormStructure demo = new FormStructure("Dynamic Data Demo");
+		final FormStructure demo = new FormStructure("Lab 1");
 		demo.pack();
 		RefineryUtilities.centerFrameOnScreen(demo);
 		demo.setVisible(true);
@@ -81,7 +81,6 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		buttonListners.keySet().stream().filter(a -> e.getActionCommand().equals(a))
 				.forEach(a -> repaintChart(buttonListners.get(a).createDataset()));
-
 	}
 
 	private void repaintChart(XYDataset dataset) {
@@ -95,7 +94,7 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 
 	private static JFreeChart createChart(XYDataset dataset) {
 
-		return ChartFactory.createXYLineChart("Test Chart", "n", "x(n)", dataset, PlotOrientation.VERTICAL, true, true,
+		return ChartFactory.createXYLineChart("Chart", "n", "x(n)", dataset, PlotOrientation.VERTICAL, true, true,
 				false);
 	}
 
