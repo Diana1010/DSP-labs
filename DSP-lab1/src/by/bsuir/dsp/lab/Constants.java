@@ -18,4 +18,10 @@ public class Constants {
 	public static double[] f1_b = { 8, 1, 5, 4, 9 };
 
 	public static double fis1_b = 0;
+
+	public static double[] A1_c = { 8, 3, 2, 1, 4 };
+
+	public static double f1_c = 2;
+
+	public static double fis1_c = 0;
 }

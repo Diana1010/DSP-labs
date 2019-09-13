@@ -35,6 +35,7 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 		buttonListners = new HashMap<>();
 		buttonListners.put("task1", new Part1Task1());
 		buttonListners.put("task2", new Part1Task2());
+		buttonListners.put("task3", new Part1Task3());
 
 		content = new JPanel(new BorderLayout());
 		content.add(formControlPanel(), BorderLayout.SOUTH);
@@ -53,6 +54,10 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 		button2.setActionCommand("task2");
 		button2.addActionListener(this);
 
+		final JButton button3 = new JButton("Variable A");
+		button3.setActionCommand("task3");
+		button3.addActionListener(this);
+
 		chartPanel = createDemoPanel(null);
 		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
 		content.add(chartPanel);
@@ -60,6 +65,7 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 		controlPanel = new JPanel(new FlowLayout());
 		controlPanel.add(button);
 		controlPanel.add(button2);
+		controlPanel.add(button3);
 		return controlPanel;
 	}
 
