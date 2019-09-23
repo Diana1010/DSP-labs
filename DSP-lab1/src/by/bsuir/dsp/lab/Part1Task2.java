@@ -8,19 +8,25 @@ public class Part1Task2 implements DatasetXY {
 
 	@Override
 	public XYDataset createDataset() {
-		XYSeriesCollection dataset = new XYSeriesCollection();
 
-		for (int i = 0; i < 5; i++) {
-			double f = Constants.f1_b[i];
-			XYSeries series = new XYSeries("f" + (i + 1) + ": " + Math.round(f * 100.0) / 100.0 + " ");
 
-			for (int n = 0; n < Constants.N; n++) {
-				series.add(n, Functions.func1(Constants.A1_a, f, n, Constants.fis1_b));
-			}
-			dataset.addSeries(series);
-		}
+         XYSeries series = new XYSeries("Test");
+         for (int n = 0; n < Constants.N; n++)
+         {
+             double sum = 0;
+             for (int i = 0; i < 5; i++)
+             {
+                 sum += Functions.func2(Constants.A1_2, Constants.f1_2[i], n, Constants.fis1_2[i]);
+                 
+             }
+             		series.add(n,sum/3); /// What is it?
+             		
+         }
 
-		return dataset;
+		return new XYSeriesCollection(series);
+		
+		
+		
+		
 	}
-
 }

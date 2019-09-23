@@ -4,7 +4,7 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class Part1Task3 implements DatasetXY {
+public class Part1Task1c implements DatasetXY {
 
 	@Override
 	public XYDataset createDataset() {
