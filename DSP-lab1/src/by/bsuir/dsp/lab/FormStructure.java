@@ -61,19 +61,19 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 		final JButton button3 = new JButton("Variable A");
 		button3.setActionCommand("task3");
 		button3.addActionListener(this);
-		
+
 		final JButton button4 = new JButton("Task2");
 		button4.setActionCommand("part1Task2");
 		button4.addActionListener(this);
-		
+
 		final JButton button5 = new JButton("Task4");
 		button5.setActionCommand("part1Task4");
 		button5.addActionListener(this);
-		
+
 		final JButton button6 = new JButton("Part2 Task1");
 		button6.setActionCommand("part2Task1");
 		button6.addActionListener(this);
-		
+
 		final JButton button7 = new JButton("Part2 Task2");
 		button7.setActionCommand("part2Task2");
 		button7.addActionListener(this);
@@ -124,7 +124,7 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 
 	private static JFreeChart createChart(XYDataset dataset) {
 
-		return ChartFactory.createXYLineChart("Chart", "n", "x(n)", dataset, PlotOrientation.VERTICAL, true, true,
+		return ChartFactory.createXYLineChart("Lab 1 DSP", "n", "x(n)", dataset, PlotOrientation.VERTICAL, true, true,
 				false);
 	}
 
