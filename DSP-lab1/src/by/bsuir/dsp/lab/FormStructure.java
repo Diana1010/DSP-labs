@@ -124,7 +124,7 @@ public class FormStructure extends ApplicationFrame implements ActionListener {
 
 	private static JFreeChart createChart(XYDataset dataset) {
 
-		return ChartFactory.createXYLineChart("Chart", "n", "x(n)", dataset, PlotOrientation.VERTICAL, true, true,
+		return ChartFactory.createXYLineChart("Lab 1 DSP", "n", "x(n)", dataset, PlotOrientation.VERTICAL, true, true,
 				false);
 	}
 
