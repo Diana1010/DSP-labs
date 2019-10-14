@@ -56,7 +56,7 @@ public class PolyharmonicSignal extends Signal {
           return values;
      }
 
-     protected double[] RestoreSignalWithoutPhase()
+     public double[] RestoreSignalWithoutPhase()
      {
           double[] values = new double[_N];
           for (int i = 0; i < _N; i++)

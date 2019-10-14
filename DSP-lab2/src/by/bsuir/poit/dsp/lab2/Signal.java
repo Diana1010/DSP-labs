@@ -5,10 +5,11 @@ public class Signal {
 	 public double[] SourceSignal;
      public double[] RestoredSignal;
 
-     protected int harmCount;
+     public int harmCount;
 
-     protected double[] sinSp, cosSp;
-     protected double[] amplSp, phaseSp;
+     public double[] sinSp, cosSp;
+     public double[] amplSp;
+	public double[] phaseSp;
 
      protected int _N;
 
