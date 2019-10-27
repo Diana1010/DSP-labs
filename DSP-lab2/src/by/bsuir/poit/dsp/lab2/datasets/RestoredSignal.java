@@ -15,7 +15,7 @@ public class RestoredSignal implements DatasetXY {
 	public XYDataset createDataset(int freq) {
 		 int  N = 256;
 			
-	        Signal signal = new HarmonicSignal(10, freq, N);
+	        Signal signal = new HarmonicSignal(20, freq, N);
 	        
 			XYSeriesCollection dataset = new XYSeriesCollection();
 		

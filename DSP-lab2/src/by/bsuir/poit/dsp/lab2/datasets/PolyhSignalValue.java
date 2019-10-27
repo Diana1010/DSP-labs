@@ -15,7 +15,7 @@ public class PolyhSignalValue implements DatasetXY {
 	public XYDataset createDataset(int freq) {
 		
 		int  N = 256;
-		double[] A =  { 1, 3, 5, 8, 10, 12, 16 };
+		double[] A =  { 1, 3, 4, 10, 11, 14, 17 };
         double[] ph =  { Math.PI / 6, Math.PI / 4, Math.PI / 3, Math.PI / 2, 3 * Math.PI / 4, Math.PI};
 
         PolyharmonicSignal signal = new PolyharmonicSignal(A, freq, ph, N);

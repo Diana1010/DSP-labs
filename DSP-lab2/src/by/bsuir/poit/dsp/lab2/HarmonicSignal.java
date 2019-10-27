@@ -23,7 +23,7 @@ public class HarmonicSignal extends Signal {
           double[] sign = new double[_N];
           for (int i = 0; i < _N; i++)
           {
-               sign[i] = _A * Math.cos(2 * Math.PI * _f * i / _N);
+               sign[i] = _A * Math.cos(2 * Math.PI * _f *10* i / _N);
           }
           return sign;
      }
