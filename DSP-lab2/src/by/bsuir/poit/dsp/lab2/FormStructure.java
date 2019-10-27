@@ -3,13 +3,13 @@ package by.bsuir.poit.dsp.lab2;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
@@ -34,15 +34,10 @@ import by.bsuir.poit.dsp.lab2.datasets.SignalValues;
 
 public class FormStructure extends ApplicationFrame implements ActionListener{
 
-	private ChartPanel chartPanel;
-	
-	
+	private ChartPanel chartPanel;	
 	private JPanel content;
-	private JPanel contentPolyh;
-	private JPanel contentFilter;
 	private JPanel basePanel;
 	public JSlider slider;
-	private JTabbedPane jtp;
 
 	private Map<String, DatasetXY> buttonListners;
 
@@ -64,18 +59,20 @@ public class FormStructure extends ApplicationFrame implements ActionListener{
 		buttonListners.put("polyhPhase", new PolyhPhase());
 		buttonListners.put("filter", new Filter());
 		
-		basePanel = new JPanel();
-		
 		content = new JPanel(new BorderLayout());
-		content.add(formControlPanel() );
-		contentPolyh = new JPanel(new BorderLayout());
-		contentPolyh.add(formControlPanelPolyHarmonic());
-		contentFilter = new JPanel(new BorderLayout());
-		contentFilter.add(formControlFilter());
-		basePanel.add(content);
-		basePanel.add(contentPolyh);
-		basePanel.add(contentFilter);
-		setContentPane(basePanel);
+		
+		     slider = new JSlider(1, 10, 1);
+	         slider.setMajorTickSpacing(1);
+	         slider.setPaintTicks(true);
+	         
+			basePanel = new JPanel(new FlowLayout());
+			basePanel.setPreferredSize(new Dimension(200, 100));
+			basePanel.add(slider);
+			
+		content.add(basePanel, BorderLayout.SOUTH);
+		content.add(formControlPanel(), BorderLayout.AFTER_LINE_ENDS );
+	
+		setContentPane(content);
 		
 	}
 
@@ -83,7 +80,7 @@ public class FormStructure extends ApplicationFrame implements ActionListener{
 
 		JPanel controlPanel;
 		
-		final JLabel label = new JLabel();
+		
 		
 		final JButton button = new JButton("Signal");
 		button.setActionCommand("task1");
@@ -100,71 +97,46 @@ public class FormStructure extends ApplicationFrame implements ActionListener{
 		final JButton button4 = new JButton("Phase");
 		button4.setActionCommand("phase");
 		button4.addActionListener(this);
+		
+		final JButton buttonFilter = new JButton("Filter");
+		buttonFilter.setActionCommand("filter");
+		buttonFilter.addActionListener(this);
+		
+		final JButton buttonPolyhSignal = new JButton("Polyharmonic Signal");
+		buttonPolyhSignal.setActionCommand("polyhSignal");
+		buttonPolyhSignal.addActionListener(this);
+
+		final JButton buttonPolyhAmpl = new JButton("Polyharmonic Amplitude");
+		buttonPolyhAmpl.setActionCommand("polyhAmplitude");
+		buttonPolyhAmpl.addActionListener(this);
+
+		final JButton buttonPolyhPhase = new JButton("Polyharmonic Phase");
+		buttonPolyhPhase.setActionCommand("polyhPhase");
+		buttonPolyhPhase.addActionListener(this);
 
 		chartPanel = createDemoPanel(null);
 		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-		basePanel.add(chartPanel);
+	    content.add(chartPanel);
 		
 		
-         slider = new JSlider(1, 10, 1);
-         slider.setMajorTickSpacing(1);
-         slider.setPaintTicks(true);
-         
-		controlPanel = new JPanel(new FlowLayout());
-		controlPanel.setPreferredSize(new Dimension(200, 200));
-		basePanel.add(slider);
+		controlPanel = new JPanel( new GridLayout(0,2));
+		controlPanel.setPreferredSize(new Dimension(300, 100));
+
+		controlPanel.add(buttonPolyhSignal);
+		
 		controlPanel.add(button);
+		controlPanel.add(buttonPolyhAmpl);
+		
+		controlPanel.add(button4);
+		controlPanel.add(buttonFilter);
+		
+		controlPanel.add(button3);
+		controlPanel.add(buttonPolyhPhase);
 		controlPanel.add(button2);
-		controlPanel.add(button3);
-		controlPanel.add(button4);
+	
 		return controlPanel;
 	}
 	
-	private JPanel formControlPanelPolyHarmonic() {
-
-		JPanel controlPanel;
-		
-		
-		final JButton button = new JButton("PolyHarmonic Signal");
-		button.setActionCommand("polyhSignal");
-		button.addActionListener(this);
-
-		final JButton button3 = new JButton("Amplitude");
-		button3.setActionCommand("polyhAmplitude");
-		button3.addActionListener(this);
-
-		final JButton button4 = new JButton("Phase");
-		button4.setActionCommand("polyhPhase");
-		button4.addActionListener(this);
-
-         
-		controlPanel = new JPanel(new FlowLayout());
-		controlPanel.setPreferredSize(new Dimension(200, 200));
-		controlPanel.add(button);
-		controlPanel.add(button3);
-		controlPanel.add(button4);
-		return controlPanel;
-	}
-	
-	
-	private JPanel formControlFilter() {
-
-		JPanel controlPanel;
-		
-		
-		final JButton button = new JButton("Filter");
-		button.setActionCommand("filter");
-		button.addActionListener(this);
-
-	
-
-         
-		controlPanel = new JPanel(new FlowLayout());
-		controlPanel.setPreferredSize(new Dimension(200, 200));
-		controlPanel.add(button);
-		return controlPanel;
-	}
-
 	public static ChartPanel createDemoPanel(XYDataset dataset) {
 		JFreeChart chart = createChart(dataset);
 		return new ChartPanel(chart);
@@ -190,11 +162,11 @@ public class FormStructure extends ApplicationFrame implements ActionListener{
 	private void repaintChart(XYDataset dataset) {
 
 		
-		basePanel.remove(chartPanel);
+		content.remove(chartPanel);
 		chartPanel = createDemoPanel(dataset);
 		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-		basePanel.add(chartPanel);
-		setContentPane(basePanel);
+		content.add(chartPanel);
+		setContentPane(content);
 		
 	}
 
